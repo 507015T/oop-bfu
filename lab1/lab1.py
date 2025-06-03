@@ -2,7 +2,7 @@ from typing import Iterator, Self
 
 
 class Point2d:
-    __slots__: tuple = ("_x", "_y")
+    __slots__ = ("_x", "_y")
     WIDTH: int = 1920
     HEIGHT: int = 1080
 
@@ -44,7 +44,7 @@ class Point2d:
 
 
 class Vector2d:
-    __slots__: tuple = ("_x", "_y")
+    __slots__ = ("_x", "_y")
 
     def __init__(self, x: int, y: int) -> None:
         self._x = x
