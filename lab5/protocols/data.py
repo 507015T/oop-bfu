@@ -1,0 +1,16 @@
+from typing import Protocol, Sequence
+from typing import TypeVar
+
+T = TypeVar("T")
+
+
+class DataRepositoryProtocol[T](Protocol):
+    def get_all(self) -> Sequence[T]: ...
+
+    def get_by_id(self, id: int) -> T | None: ...
+
+    def add(self, item: T) -> None: ...
+
+    def update(self, item: T) -> None: ...
+
+    def delete(self, item: T) -> None: ...
