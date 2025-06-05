@@ -31,8 +31,8 @@ if __name__ == "__main__":
         auth_service.sign_in(login_user)
         print(f"Успешная авторизация: {auth_service.current_user.name}")
 
-    # auth_service.sign_out()
-    # print("Пользователь вышел из системы.")
+    auth_service.sign_out()
+    print("Пользователь вышел из системы.")
 
     # Проверка автологина
     if auth_service.is_authorized:

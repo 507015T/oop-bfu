@@ -102,7 +102,6 @@ class Printer:
 
 
 if __name__ == "__main__":
-
     Printer.print("SMALL", Color.RED, (5, 40), "●", 1)
     Printer.print("MEDIUM", Color.GREEN, (10, 40), "▲", 2)
     Printer.print("LARGE", Color.BLUE, (11, 40), "♦", 3)

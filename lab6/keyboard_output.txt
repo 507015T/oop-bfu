@@ -1,12 +1,8 @@
-a
-ab
-a
-aa
-aab
-aabo
-aabok
-aabokw
-aabokwe
-aabokwer
-aabokwert
-aabokwertl
+volume increased +20%
+volume decreased -20%
+Playing media
+Stopped media
+Playing media
+b
+bf
+bf9
