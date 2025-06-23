@@ -67,7 +67,7 @@ class Printer:
         for char in text.upper():
             if char not in FONT_DATA["symbols"]:
                 continue
-            char_pattern = FONT_DATA["symbols"][char].split("\n")
+            char_pattern = FONT_DATA["symbols"][char]
             scaled_pattern = cls._scale_pattern(char_pattern, font_size)
 
             for i, line in enumerate(scaled_pattern):
