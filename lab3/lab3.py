@@ -47,6 +47,8 @@ class FileHandler(LogHandlerProtocol):
             await self._handle(text)
         except (IOError, PermissionError) as e:
             sys.stderr.write(f"FileHandler error: {e}\n")
+        except Exception as e:
+            sys.stderr.write(f"FileHandler unexpected error: {e}\n")
 
     async def _handle(self, text: str) -> None:
         async with aiofiles.open(self.filename, "a", encoding="utf-8") as f:
@@ -64,6 +66,8 @@ class SocketHandler(LogHandlerProtocol):
             await self._handle(text)
         except (OSError, asyncio.TimeoutError) as e:
             sys.stderr.write(f"SocketHandler error: {e}\n")
+        except Exception as e:
+            sys.stderr.write(f"SocketHandler unexpected error: {e}\n")
 
     async def _handle(self, text: str) -> None:
         _, writer = await asyncio.wait_for(
@@ -80,15 +84,21 @@ class ConsoleHandler(LogHandlerProtocol):
         self.use_stderr = use_stderr
 
     async def handle(self, text: str) -> None:
-        if self.use_stderr:
-            sys.stderr.write(f"{text}\n")
-        else:
-            print(text)
+        try:
+            if self.use_stderr:
+                sys.stderr.write(f"{text}\n")
+            else:
+                print(text)
+        except Exception as e:
+            sys.stderr.write(f"ConsoleHandler error: {e}\n")
 
 
 class SyslogHandler(LogHandlerProtocol):
     async def handle(self, text: str) -> None:
-        sys.stderr.write(f"SYSLOG: {text}\n")
+        try:
+            sys.stderr.write(f"SYSLOG: {text}\n")
+        except Exception as e:
+            sys.stderr.write(f"SyslogHandler error: {e}\n")
 
 
 class Logger:
@@ -100,7 +110,11 @@ class Logger:
 
     async def log(self, text: str) -> None:
         if all(f.match(text) for f in self._filters):
-            await asyncio.gather(*(h.handle(text) for h in self._handlers))
+            for handler in self._handlers:
+                try:
+                    await handler.handle(text)
+                except Exception as e:
+                    sys.stderr.write(f"Logger failed to handle log: {e}\n")
 
 
 async def main() -> None:
