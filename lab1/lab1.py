@@ -1,10 +1,12 @@
 from typing import Iterator, Self
 
+# constants
+WIDTH: int = 1920
+HEIGHT: int = 1080
+
 
 class Point2d:
     __slots__ = ("_x", "_y")
-    WIDTH: int = 1920
-    HEIGHT: int = 1080
 
     def __init__(self, x: int, y: int) -> None:
         self.x = x
@@ -16,7 +18,7 @@ class Point2d:
 
     @x.setter
     def x(self, value: int) -> None:
-        self._x = self.check_coordinate(value, self.WIDTH)
+        self._x = self.check_coordinate(value, WIDTH)
 
     @property
     def y(self) -> int:
@@ -24,7 +26,7 @@ class Point2d:
 
     @y.setter
     def y(self, value: int) -> None:
-        self._y = self.check_coordinate(value, self.HEIGHT)
+        self._y = self.check_coordinate(value, HEIGHT)
 
     @staticmethod
     def check_coordinate(value: int, limit: int) -> int:

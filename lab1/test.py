@@ -1,11 +1,9 @@
 import pytest
-from lab1 import Point2d, Vector2d
+from lab1 import Point2d, Vector2d, WIDTH, HEIGHT
 
 
 class TestPoint2d:
-    @pytest.mark.parametrize(
-        "x,y", [(0, 0), (100, 200), (Point2d.WIDTH, Point2d.HEIGHT)]
-    )
+    @pytest.mark.parametrize("x,y", [(0, 0), (100, 200), (WIDTH, HEIGHT)])
     def test_valid_creation(self, x, y):
         point = Point2d(x, y)
         assert point.x == x
@@ -13,7 +11,7 @@ class TestPoint2d:
 
     @pytest.mark.parametrize(
         "x,y",
-        [(-1, 100), (Point2d.WIDTH + 1, 100), (100, -1), (100, Point2d.HEIGHT + 1)],
+        [(-1, 100), (WIDTH + 1, 100), (100, -1), (100, HEIGHT + 1)],
     )
     def test_invalid_creation(self, x, y):
         with pytest.raises(ValueError):
